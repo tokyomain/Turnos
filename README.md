@@ -1,5 +1,5 @@
  Este es mi primer proyecto personal. La idea es aplicar conocimientos adquiridos durante mi primer año
- como estudiante de programación.
+ como estudiante autodidacta de programación.
 
  Los puntos principales a aplicar son: Programación Orientada a objectos y Programación funcional.
 
