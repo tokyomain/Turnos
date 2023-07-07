@@ -186,3 +186,5 @@ print(dict_francos)
 '''dict = crear_dict_empleados(LISTA_EMPLEADOS)
 lista_id_hs = lista_id_hs(dict)
 print(f'Lista Id-Hs: {lista_id_hs}')'''
+
+# Escribo algo para hacer nuevo commit, probando.
