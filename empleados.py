@@ -64,8 +64,6 @@ class Empleado:
 #------------------------------------------------------------------------------------------------------
 
 
-
-
 def crear_dict_empleados(lista: str):
     """
     Recibe una lista de nombres:str y retorna un diccionario
