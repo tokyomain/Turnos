@@ -1,9 +1,10 @@
 # Pasos del proyecto
 
 # 1) Definir Lista de empleados
-    # Hay que pensar si nos conviene hacer OOP o funcional. Que ventajas nos da?
+    
 # 2) Definir turnos
-    # Mañana, Tarde, Noche
+    # Mañana, Tarde, Noche > esto no necesariamente tiene que estar atado al calendario real en un principio
+        # ...podemos simplemente crear una estructura para cada turno y otorgar los empleados necesarios.
     # Ver cuando turnos son cortados.
 # 3) Definir periodo de turnos a asignar: ie semanal, mensual
     # Semanal en principio
@@ -15,6 +16,8 @@
     # Francos
     # Vacaciones
     # Que empleados no van juntos. Sistema de confiabilidad
+    # Tambien tenemos que pensar la disponibilidad de empleados para cada dia: Hay 9 empleados, uno tiene turno Noche, y ademas
+        #...tenemos 1 empleado por dia con franco y en algun dia hay 2, por lo tanto tenemos 7 empleados por dia y un dia 6.
 # 6) Asignar
     # Aca vamos a tener por un lado la lista de empleados y por otro una determinada cantidad
     # de turnos. 
@@ -98,7 +101,9 @@ lista_empleados = ['juan', 'nito1', 'nito2', 'pocho', 'matias', 'diego', 'marcel
 def crear_dict_empleados(lista: str):
     """
     Recibe una lista de nombres:str y retorna un diccionario
-    con el ID como key y la instancia(objecto) como valor"""
+    con el ID como key y la instancia(objecto) como valor
+    ? Pensaba si seria mejor crear alguna estructura solo con los objectos y luego 
+    en otro paso, transformarlo en diccionario, agregarle ID, etc..."""
 
     dict_empleados = {}
     for nombre in lista:
@@ -126,14 +131,12 @@ def lista_id_hs(diccionario):
 
 diccionario = crear_dict_empleados(lista_empleados)
 lista_id_hs = lista_id_hs(diccionario)
-print(lista_id_hs)
-print(diccionario)
-empleado = diccionario[2]
+empleado = diccionario[5]
 empleado.actualizar_horas_trabajadas(10)
 empleado.actualizar_horas_trabajadas(10)
 empleado.actualizar_horas_trabajadas(8)
-
-print(diccionario[2])
+print('Lista_id_hs:',lista_id_hs)
+print(diccionario[5], diccionario[4], diccionario[3])
 # Funcion otorgar_turnos: recibe una semana y una lista de objectos de empleados
 # retorna semana con turnos mañana y tarde otorgados VER
 
