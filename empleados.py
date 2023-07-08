@@ -93,7 +93,7 @@ def lista_nombre_hs(diccionario):
 def quitar_empleado_noche(empleado_noche, lista_empleados_copia, DICCIONARIO_OBJECTOS, LISTA_EMPLEADOS):
     '''Quita el empleado de Turno noche de la lista de empleados y actualiza su
     atributo horas trabajadas 
-    TODO: Deberia actualizar los parametros del objeto de dicho empleado'''
+    '''
     del lista_empleados_copia[empleado_noche - 1]
     nombre_empleado = LISTA_EMPLEADOS[empleado_noche - 1]
     DICCIONARIO_OBJECTOS[nombre_empleado].actualizar_horas_trabajadas(56)
