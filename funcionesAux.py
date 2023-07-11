@@ -12,10 +12,10 @@ from claseEmpleado import *
     # 9- Ver vacaciones > devolver el empleado con vacaciones para esta semana.
 
 def crear_dict_empleados(lista: str):
-    """
+    '''
     Recibe una lista de nombres:str y retorna un diccionario
     con el Nombre como key y Objecto como valor > {'Nombre': 'Obj'}
-    """
+    '''
     d = {}
     for nombre in lista:
         emp = Empleado(nombre)
@@ -23,25 +23,33 @@ def crear_dict_empleados(lista: str):
     return d
 
 def lista_nombre_hs(diccionario):
-    """
+    ''' 
     Recibe un diccionario {'Nombre': 'Obj'} y retorna una lista de listas: [Nombre, Horas_trabajadas]
-    """
+    '''
     lista = []
     for nombre, empleado in diccionario.items():
         lista.append([nombre, empleado.obtener_horas_trabajadas()])
     return lista
 
-def asignar_empleado_noche(empleado_noche, lista_empleados_copia, DICCIONARIO_OBJETOS, LISTA_EMPLEADOS):
-    '''Quita el empleado de Turno noche de la lista de empleados y actualiza su
-    atributo horas trabajadas 
-    VER: En esta funcion creo que no es necesario como parametro la "lista_empleados_copia", puedo modificar
-    directamente la LISTA_EMPLEADOS ya que los cambios solo tendran alcance local, no modificara la lista
-    original por fuera de esta funcion, si sucederá que devolvere esta lista, pero eso lo puedo guardar en una
-    nueva variable.
+def ver_lista_empleados(LISTA_EMPLEADOS):
     '''
+    Recibe una lista de empleados e imprime la lista compleata de empleados.
+    '''
+    print(f'----------------------------------\n        Lista de empleados\n----------------------------------')
+    for count, empleado in enumerate(LISTA_EMPLEADOS, start=1):
+        print('    ', count, '-', empleado)
+    print('----------------------------------')
+    
+
+def asignar_empleado_noche(DICCIONARIO_OBJETOS, LISTA_EMPLEADOS, turnos):
+    '''Asigna empleado al turno noche, actualiza TURNOS para el empleado Noche
+    y actualiza sus atributos de horas trabajadas.
+    '''
+    print('Seleccione un empleado de la lista para asignarlo al Turno Noche > ')
+    ver_lista_empleados(LISTA_EMPLEADOS)
     while True:
         try:
-            empleado_noche = int(input('Quien es el empleado para el turno Noche? Ingrese un número (1-9)\n'))
+            empleado_noche = int(input('Quien es el empleado para el turno Noche? Ingrese un número (1-9) > '))
             if not (1 <= empleado_noche <= 9):
                 print(f'Por favor, ingrese una respuesta válida. "{empleado_noche}" no es una respuesta válida.')
             else:
@@ -50,10 +58,24 @@ def asignar_empleado_noche(empleado_noche, lista_empleados_copia, DICCIONARIO_OB
         except ValueError:
             print('Por favor, ingrese un número válido.')
             
-    del lista_empleados_copia[empleado_noche - 1]
     nombre_empleado = LISTA_EMPLEADOS[empleado_noche - 1]
     DICCIONARIO_OBJETOS[nombre_empleado].actualizar_horas_trabajadas(56)
-    return lista_empleados_copia
+    # Aca tengo que meter el empleado elegido a la estructura 'turnos' para cada dia en el
+    # turno 'Noche'
+    for dia in turnos.keys():
+        turnos[dia]['Noche'].append(nombre_empleado)
+    return turnos
+
+def ver_empleado_noche(turnos):
+    '''
+    Imprime en consola el empleado asignado para el turno Noche de toda la semana
+    '''
+    try:
+        if len(turnos['Lunes']['Noche'][0]) > 0:
+            empleado_noche = turnos['Lunes']['Noche'][0]
+            print(f'El empleado asignado a turno Noche es: {empleado_noche}')
+    except IndexError:
+        print('No hay empleado asignado para el turno Noche.')
 
 def asignar_francos(SEMANA, lista_empleados):
     '''
