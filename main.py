@@ -4,11 +4,16 @@ import copy
 
 # CONSTANTES
 SEMANA = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'] 
+# Uso una lista para la siguiente estructura porq es mutable, y algun dia se 
+# ..puede incorporar o darse de baja algun empleado.
 LISTA_EMPLEADOS = ['David', 'Diego', 'Juan', 'Marcelo', 'Matias', 'Nito', 'Paco', 'Pocho', 'Ruben']
+
+# VARIABLES GOBLALES
 turnos = {'Lunes': {'Mañana': [], 'Tarde': [], 'Noche': []}, 'Martes': {'Mañana': [], 'Tarde': [], 'Noche': []},
           'Miercoles': {'Mañana': [], 'Tarde': [], 'Noche': []}, 'Jueves': {'Mañana': [], 'Tarde': [], 'Noche': []},
           'Viernes': {'Mañana': [], 'Tarde': [], 'Noche': []}, 'Sabado': {'Mañana': [], 'Tarde': [], 'Noche': []},
           'Domingo': {'Mañana': [], 'Tarde': [], 'Noche': []}}
+
 
 #------------------------------------------------------------------------------------------------------
 #                                          Programa Principal
@@ -27,7 +32,7 @@ d = crear_dict_empleados(LISTA_EMPLEADOS)
     # 7 - Ver vacaciones.
     # 8 - Salir.
 
-# MENU
+# MENU PRINCIPAL
 while True:
     # Esto puede ser una funcion > muestra_menu VER
 
@@ -77,15 +82,5 @@ while True:
             print(f'Por favor, ingrese una respuesta válida. "{accion}" no es una respuesta válida.')
 
 
-
-lista_empleados_copia = copy.deepcopy(LISTA_EMPLEADOS)
-lista_empleados_copia= asignar_empleado_noche(empleado_noche, lista_empleados_copia, DICCIONARIO_OBJETOS, LISTA_EMPLEADOS)
-
-
-# 11/7 > 
-#   - fun creada > ver_lista_empleados()
-#   - Accion ver_lista_empleados() incorporada a la funcionalidad del Menu.
-#   - fun creada asignar_empleado_noche
-#   - funcionalidad incorporada al menu principal
-#   - fun creada ver_empleado_noche
-#   - funcionalidad incorporada al menu principal
+# TODO: Asignar francos
+# TODO: Ver francos asignados 

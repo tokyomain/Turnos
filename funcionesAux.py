@@ -1,11 +1,13 @@
 from claseEmpleado import *
 
+# TODO: Podriamos separar entre funciones para crear estructuras y 
+# ..funciones de acciones. ANALIZAR
 # TODO: Funciones del Menu principal
     # 1- Ver Lista Empleados > Simplemente imprimir la lista de todos los empleados
     # 2- Asignar turno Noche > OK
     # 3- Ver Empleado turno Noche > devolver el empleado en cuestion.
     # 4- Asignar Francos > OK Ver
-    # 5- Ver turnos asignados > 
+    # 5- Ver Francos asignados > 
     # 6- Asignar turnos
     # 7- Ver turnos asignados
     # 8- Asignar vacaciones
@@ -77,9 +79,10 @@ def ver_empleado_noche(turnos):
     except IndexError:
         print('No hay empleado asignado para el turno Noche.')
 
-def asignar_francos(SEMANA, lista_empleados):
+def asignar_francos(SEMANA, LISTA_EMPLEADOS):
     '''
-    Recibe una semana de dias y devuelve un diccionario > {'Dia': 'Nombre'}
+    Recibe una semana, lista de empleados y diccionario con objectos 
+    y devuelve un diccionario > {'Dia': 'Nombre'}.
     Cuando pregunta para asignar el empleado de franco para el dia deberiamos
     mostrar la lista de empleados disponibles para elegir.
     '''
@@ -89,24 +92,27 @@ def asignar_francos(SEMANA, lista_empleados):
         for count, empleado in enumerate(lista_empleados, start=1):
             print('    ', count, empleado)
         emp = int(input(f'Franco para el dia: {dia}. \nIngrese un número >'))
-        d[dia] = lista_empleados[emp - 1]
+        d[dia] = LISTA_EMPLEADOS[emp - 1]
         # Si aca uso pop me devuelve el empleado borrado
         # EX: ultima_fruta = frutas.pop()
-        franco = lista_empleados.pop(emp -1 )
+        franco = LISTA_EMPLEADOS.pop(emp -1 )
         print(f'El empleado de franco para el dia {dia} es: {franco}')
         # del lista_empleados[emp - 1]
     return d
 
 # TODO:
-'''def asignar_turnos(DIA, lista_empleados_copia, lista_id_hs, dict_francos):
+'''def asignar_turnos(DIA, lista_id_hs, dict_francos, DICCIONARIO_OBJETOS):
     
-    Recibe lista de empleados sin el de turno noche. 
-    Lo primero que tenemos que hacer es quitar el empleado de franco, por lo que necesitamos el dict_francos
-    Luego si puedo proceder a iterar sobre los dias de la semana
+    Recibe lista de empleados, un dia, diccionario con francos, y el diccionario 
+    con objetos de la clase empleado.
+    Lo primero que tenemos que hacer es quitar el empleado de turno noche y el 
+    empleado de franco para el dia.
     
     # Esta funcion deberia ser mas simple, otorgar turnos para un dia, y luego en el Main iterar
     # sobre la semana invocando la funcion para cada dia.
-        # Creo una copia de la lista para el dia, asi el proximo dia esta completa
+        # Creo una copia de la lista para el dia, asi el proximo dia esta completa (no es necesario
+        ya que si modifico la lista en la funcion solo tendra alcance local y no se
+        modificara la lista original. CHEQUEAR)
     lista_copia = copy.deepcopy(LISTA_EMPLEADOS)
     # Quito empleado de franco
     franco = dict_francos[day]
