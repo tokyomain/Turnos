@@ -52,35 +52,44 @@ while True:
     print('10 - Salir')
     print('----------------------------------')
     
-    while True:
-        accion = input('Que tarea desea realizar? (1-10) > ')
-        try:
-            accion = int(accion)
-            if not (1 <= accion <= 10):
-                print(f'Por favor, ingrese una respuesta válida. "{accion}" no es una respuesta válida.')
-            elif accion == 1:
-                ver_lista_empleados(LISTA_EMPLEADOS)
-                accion = input("Presione 'Enter' para continuar > ")
-                break
-            elif accion == 2:
+
+    accion = input('Que tarea desea realizar? (1-10) > ')
+    try:
+        accion = int(accion)
+        if not (1 <= accion <= 10):
+            print(f'Por favor, ingrese una respuesta válida. "{accion}" no es una respuesta válida.')
+        elif accion == 1:
+            ver_lista_empleados(LISTA_EMPLEADOS)
+            accion = input("Presione 'Enter' para continuar > ")
+        elif accion == 2:
+            if len(turnos['Lunes']['Noche']) == 1:
+                print(f"Ya existe un empleado asignado para el turno noche: {turnos['Lunes']['Noche'][0]}")
+                cambiar = input('Desea reemplazar el empleado asignado? (S/N) > ')
+                if cambiar == 's' or cambiar =='S':
+                    reemplazar_empleado_noche(d, LISTA_EMPLEADOS, turnos)
+                    accion = input("Presione 'Enter' para continuar > ")
+                else:
+                    continue
+            else:
                 asignar_empleado_noche(d, LISTA_EMPLEADOS, turnos)
                 accion = input("Presione 'Enter' para continuar > ")
-                break
-            elif accion ==3:
-                ver_empleado_noche(turnos)
-                accion = input("Presione 'Enter' para continuar > ")
-                break
-            #elif accion ==4:
-            #elif accion ==5:
-            #elif accion ==6:
-            #elif accion ==7:
-            #elif accion ==8:
-            #elif accion ==9:
-            #elif accion ==10:
-                continue
-        except ValueError:
-            print(f'Por favor, ingrese una respuesta válida. "{accion}" no es una respuesta válida.')
+
+        elif accion == 3:
+            ver_empleado_noche(turnos)
+            accion = input("Presione 'Enter' para continuar > ")
+        #elif accion ==4:
+        #elif accion ==5:
+        #elif accion ==6:
+        #elif accion ==7:
+        #elif accion ==8:
+        #elif accion ==9:
+        elif accion == 10:
+            print('El programa finalizará. Hasta pronto!')
+            break
+    except ValueError:
+        print(f'Por favor, ingrese una respuesta válida. "{accion}" no es una respuesta válida.')
 
 
 # TODO: Asignar francos
 # TODO: Ver francos asignados 
+#print(turnos)

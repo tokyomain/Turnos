@@ -43,7 +43,7 @@ def ver_lista_empleados(LISTA_EMPLEADOS):
     print('----------------------------------')
     
 
-def asignar_empleado_noche(DICCIONARIO_OBJETOS, LISTA_EMPLEADOS, turnos):
+def asignar_empleado_noche(d, LISTA_EMPLEADOS, turnos):
     '''Asigna empleado al turno noche, actualiza TURNOS para el empleado Noche
     y actualiza sus atributos de horas trabajadas.
     '''
@@ -51,7 +51,7 @@ def asignar_empleado_noche(DICCIONARIO_OBJETOS, LISTA_EMPLEADOS, turnos):
     ver_lista_empleados(LISTA_EMPLEADOS)
     while True:
         try:
-            empleado_noche = int(input('Quien es el empleado para el turno Noche? Ingrese un número (1-9) > '))
+            empleado_noche = int(input('Selecccione un empleado para el turno Noche? Ingrese un número (1-9) > '))
             if not (1 <= empleado_noche <= 9):
                 print(f'Por favor, ingrese una respuesta válida. "{empleado_noche}" no es una respuesta válida.')
             else:
@@ -61,11 +61,34 @@ def asignar_empleado_noche(DICCIONARIO_OBJETOS, LISTA_EMPLEADOS, turnos):
             print('Por favor, ingrese un número válido.')
             
     nombre_empleado = LISTA_EMPLEADOS[empleado_noche - 1]
-    DICCIONARIO_OBJETOS[nombre_empleado].actualizar_horas_trabajadas(56)
-    # Aca tengo que meter el empleado elegido a la estructura 'turnos' para cada dia en el
-    # turno 'Noche'
+        
     for dia in turnos.keys():
         turnos[dia]['Noche'].append(nombre_empleado)
+    d[nombre_empleado].actualizar_horas_trabajadas(56)
+    return turnos
+
+def reemplazar_empleado_noche(d, LISTA_EMPLEADOS, turnos):
+    '''
+    Reemplaza el empleado asignado para el turno noche.'''
+
+    print('Seleccione un empleado de la lista para reasignar el Turno Noche > ')
+    ver_lista_empleados(LISTA_EMPLEADOS)
+    while True:
+        try:
+            empleado_noche = int(input('Selecccione un empleado para reemplazar al empleado existente? Ingrese un número (1-9) > '))
+            if not (1 <= empleado_noche <= 9):
+                print(f'Por favor, ingrese una respuesta válida. "{empleado_noche}" no es una respuesta válida.')
+            else:
+                print(f'El empleado No. {empleado_noche} - "{LISTA_EMPLEADOS[empleado_noche-1]}" está asignado para el turno Noche.')
+                break
+        except ValueError:
+            print('Por favor, ingrese un número válido.')
+            
+    nombre_empleado = LISTA_EMPLEADOS[empleado_noche - 1]
+        
+    for dia in turnos.keys():
+        turnos[dia]['Noche'][0] = nombre_empleado
+    d[nombre_empleado].actualizar_horas_trabajadas(56)
     return turnos
 
 def ver_empleado_noche(turnos):
