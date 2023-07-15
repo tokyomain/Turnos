@@ -34,3 +34,9 @@ print(DICCIONARIO_OBJETOS['Juan'].obtener_franco_semanal())
 
 lista_empleados_copia = copy.deepcopy(LISTA_EMPLEADOS)
 '''
+
+# Cambios 14/7
+#   - Agregado modulo 'logging' para debugear.
+#   - Agregada estructura para alojar francos. Diccionario
+#   - Agregada la funcion asignar_francos.
+#   - Agregada la funcion ver_francos_asignados
