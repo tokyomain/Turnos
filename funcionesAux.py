@@ -102,26 +102,57 @@ def ver_empleado_noche(turnos):
     except IndexError:
         print('No hay empleado asignado para el turno Noche.')
 
-def asignar_francos(SEMANA, LISTA_EMPLEADOS):
+def asignar_francos(SEMANA, LISTA_EMPLEADOS, dict_objetos, francos, turnos):
     '''
-    Recibe una semana, lista de empleados y diccionario con objectos 
-    y devuelve un diccionario > {'Dia': 'Nombre'}.
+    Recibe una semana, lista de empleados, diccionario con objectos, diccionario
+    francos y diccionario turnos.
+    Devuelve el diccionario francos con los datos actualizados > {'Dia': 'Nombre'}.
     Cuando pregunta para asignar el empleado de franco para el dia deberiamos
     mostrar la lista de empleados disponibles para elegir.
+    VER: Mas o menos funciona. Ver cuando se ingresan caracteres no deseados.
     '''
-    d = {}
+    # Primero debo quitar de la lista al empleado del turno noche.
+    try:
+        empleado_turno_noche = turnos['Lunes']['Noche'][0]
+    except IndexError:
+        print('Aparentemente no hay un empleado asignado para el turno noche.\n'
+              'Regrese al Menú Principal y asigne un empleado para el turno noche.')
+        return
+    LISTA_EMPLEADOS.remove(empleado_turno_noche)
     print('Ahora asignaremos los francos para la semana:')
-    for dia in SEMANA:
-        for count, empleado in enumerate(lista_empleados, start=1):
-            print('    ', count, empleado)
-        emp = int(input(f'Franco para el dia: {dia}. \nIngrese un número >'))
-        d[dia] = LISTA_EMPLEADOS[emp - 1]
-        # Si aca uso pop me devuelve el empleado borrado
-        # EX: ultima_fruta = frutas.pop()
-        franco = LISTA_EMPLEADOS.pop(emp -1 )
-        print(f'El empleado de franco para el dia {dia} es: {franco}')
-        # del lista_empleados[emp - 1]
-    return d
+    flag = True
+    while flag == True: 
+        for dia in SEMANA:
+            if len(LISTA_EMPLEADOS) > 0:
+                print('----------------------------------')
+                for count, empleado in enumerate(LISTA_EMPLEADOS, start=1):
+                    print('    ', count, empleado)
+                print('----------------------------------')
+                emp = input(f'Asignar franco para el dia: {dia}.\n' 
+                            'Seleccione un número de empleado y presione "Enter" o '
+                            'presione "c(continuar) + Enter" si no quiere otorgar franco para este dia > ')
+                if emp == 'c' or emp == 'C':
+                    continue
+                else:
+                    emp = int(emp)
+                    francos[dia].append(LISTA_EMPLEADOS[emp - 1])
+                    franco = LISTA_EMPLEADOS.pop(emp -1 )
+                    print(f'El empleado de franco para el dia {dia} es: {franco}')
+                    continue
+            flag = False
+    return francos
+
+
+def ver_francos_asignados(francos):
+    print(f'Francos para cada día:')
+    for dia, empleados in francos.items():
+        if len(empleados) > 0:
+            print(f'{dia}: ', end='')
+            for i, empleado in enumerate(empleados):
+                if i > 0:
+                    print(' - ', end='')
+                print(empleado, end='')
+            print()
 
 # TODO:
 '''def asignar_turnos(DIA, lista_id_hs, dict_francos, DICCIONARIO_OBJETOS):
@@ -140,4 +171,3 @@ def asignar_francos(SEMANA, LISTA_EMPLEADOS):
     # Quito empleado de franco
     franco = dict_francos[day]
     del lista_copia[franco]'''
-   
