@@ -2,7 +2,7 @@
 class Empleado:
     ultimo_id = 0
 
-    def __init__(self, nombre: str, horas=0, dias=0, vacaciones=False, disponibilidad=True, confiabilidad=None, turnos=None, franco_semanal=''):
+    def __init__(self, nombre: str, horas=0, dias=0, vacaciones=False, disponibilidad=True, confiabilidad=None, turnos='', franco_semanal=''):
         self.id = Empleado.generar_id()
         self.nombre = nombre
         self.horas_trabajadas = horas
